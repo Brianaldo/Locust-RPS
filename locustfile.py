@@ -11,7 +11,12 @@ class WebsiteUser(HttpUser):
 
     @task
     def load_test(self):
-        self.client.get("/s0", name="HTTP Request")
+        # self.client.get("/s0", name="HTTP Request")
+        self.client.get("/s1", name="HTTP Request")
+        self.client.get("/s2", name="HTTP Request")
+        self.client.get("/s3", name="HTTP Request")
+        self.client.get("/s4", name="HTTP Request")
+        self.client.get("/s5", name="HTTP Request")
         
 class StagesShapeWithCustomUsers(LoadTestShape):
 
