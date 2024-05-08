@@ -7,7 +7,7 @@ import gevent
 # Load the CSV
 df = pd.read_csv('freq.csv', parse_dates=[0])
 df.sort_values('time', inplace=True)
-df['frequency'] = df['frequency'].div(2)
+df['frequency'] = df['frequency'].div(2).astype(int)
 total_row = len(df.index)
 start_time = df['time'].iloc[0]
 
