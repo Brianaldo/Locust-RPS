@@ -11,24 +11,25 @@ class WebsiteUser(HttpUser):
 
     @task
     def load_test(self):
-        # self.client.get("/s0", name="HTTP Request")
-        self.client.get("/s1", name="HTTP Request")
-        self.client.get("/s2", name="HTTP Request")
-        self.client.get("/s3", name="HTTP Request")
-        self.client.get("/s4", name="HTTP Request")
-        self.client.get("/s5", name="HTTP Request")
+        self.client.get("/s0", name="HTTP Request")
+        
         
 class StagesShapeWithCustomUsers(LoadTestShape):
 
     stages = [
-        {"duration":  5 * 60, "users": 5, "spawn_rate": 1, "user_classes": [WebsiteUser]},
-        {"duration":  5 * 60, "users": 10, "spawn_rate": 1, "user_classes": [WebsiteUser]},
-        {"duration": 10 * 60, "users": 30, "spawn_rate": 2, "user_classes": [WebsiteUser]},
-        {"duration": 10 * 60, "users": 50, "spawn_rate": 2, "user_classes": [WebsiteUser]},
-        {"duration": 10 * 60, "users": 100, "spawn_rate": 2, "user_classes": [WebsiteUser]},
-        {"duration":  5 * 60, "users": 300, "spawn_rate": 10, "user_classes": [WebsiteUser]},
-        {"duration":  5 * 60, "users": 200, "spawn_rate": 5, "user_classes": [WebsiteUser]},
+        {"duration":  10 * 60, "users": 1, "spawn_rate": 1, "user_classes": [WebsiteUser]},
+        {"duration":  10 * 60, "users": 2, "spawn_rate": 1, "user_classes": [WebsiteUser]},
+        {"duration":  15 * 60, "users": 5, "spawn_rate": 2, "user_classes": [WebsiteUser]},
+        {"duration":  15 * 60, "users": 10, "spawn_rate": 2, "user_classes": [WebsiteUser]},
+        {"duration":  15 * 60, "users": 30, "spawn_rate": 3, "user_classes": [WebsiteUser]},
+        {"duration":  20 * 60, "users": 50, "spawn_rate": 5, "user_classes": [WebsiteUser]},
+        {"duration":  20 * 60, "users": 100, "spawn_rate": 10, "user_classes": [WebsiteUser]},
+        {"duration":  15 * 60, "users": 300, "spawn_rate": 5, "user_classes": [WebsiteUser]},
+        {"duration":  10 * 60, "users": 200, "spawn_rate": 5, "user_classes": [WebsiteUser]},
         {"duration":  10 * 60, "users": 10, "spawn_rate": 2, "user_classes": [WebsiteUser]},
+        {"duration":  15 * 60, "users": 5, "spawn_rate": 2, "user_classes": [WebsiteUser]},
+        {"duration":  10 * 60, "users": 2, "spawn_rate": 1, "user_classes": [WebsiteUser]},
+        {"duration":  10 * 60, "users": 1, "spawn_rate": 1, "user_classes": [WebsiteUser]},
     ]
 
     def tick(self):
