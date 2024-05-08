@@ -21,13 +21,13 @@ class WebsiteUser(HttpUser):
     wait_time = constant_pacing(1)
 
     def scheduled_task(self):
-        # self.client.get("/s0", name="HTTP Request")
-        self.client.get("/s1", name="HTTP Request")
-        self.client.get("/s2", name="HTTP Request")
-        self.client.get("/s3", name="HTTP Request")
-        self.client.get("/s4", name="HTTP Request")
-        self.client.get("/s5", name="HTTP Request")
-        self.client.get("/s6", name="HTTP Request")
+        self.client.get("/s0", name="HTTP Request")
+        # self.client.get("/s1", name="HTTP Request")
+        # self.client.get("/s2", name="HTTP Request")
+        # self.client.get("/s3", name="HTTP Request")
+        # self.client.get("/s4", name="HTTP Request")
+        # self.client.get("/s5", name="HTTP Request")
+        # self.client.get("/s6", name="HTTP Request")
 
     @task
     def load_test(self):
