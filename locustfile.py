@@ -7,10 +7,12 @@ import gevent
 # Load the CSV
 df = pd.read_csv('freq.csv', parse_dates=[0])
 df.sort_values('time', inplace=True)
+df = df.tail(24 * 60 * 60)
 total_row = len(df.index)
 start_time = df['time'].iloc[0]
 
 counter = 0
+
 
 class WebsiteUser(HttpUser):
     def __init__(self, *args, **kwargs):
@@ -22,12 +24,6 @@ class WebsiteUser(HttpUser):
 
     def scheduled_task(self):
         self.client.get("/s0", name="HTTP Request")
-        # self.client.get("/s1", name="HTTP Request")
-        # self.client.get("/s2", name="HTTP Request")
-        # self.client.get("/s3", name="HTTP Request")
-        # self.client.get("/s4", name="HTTP Request")
-        # self.client.get("/s5", name="HTTP Request")
-        # self.client.get("/s6", name="HTTP Request")
 
     @task
     def load_test(self):
@@ -36,14 +32,17 @@ class WebsiteUser(HttpUser):
         if counter > total_row:
             raise StopUser()
 
-        time_diff = int((df['time'].iloc[counter] - start_time).total_seconds())
+        time_diff = int((df['time'].iloc[counter] -
+                        start_time).total_seconds())
         if time_diff == counter:
             frequency = df['frequency'].iloc[counter]
-            task_queue = [gevent.spawn(self.scheduled_task) for _ in range(frequency)]
+            task_queue = [gevent.spawn(self.scheduled_task)
+                          for _ in range(frequency)]
             gevent.joinall(task_queue)
-            
+
         counter += 1
-        
+
+
 @events.test_stop.add_listener
 def on_test_stop(environment, **kwargs):
     print("Load test completed.")
